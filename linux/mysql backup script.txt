@@ -1,0 +1,29 @@
+#!/bin/sh
+
+
+
+/usr/local/bin/automysqlbackup /etc/automysqlbackup/myserver.conf
+
+
+
+chown backupuser.backupuser /var/backup/db* -R
+
+find /var/backup/db* -type f -exec chmod 400 {} \;
+
+find /var/backup/db* -type d -exec chmod 700 {} \;
+
+
+
+export AWS_ACCESS_KEY_ID="***"
+
+export AWS_SECRET_ACCESS_KEY="***"
+
+
+
+duplicity --encrypt-key 922081B1 /var/backup/db/ s3://s3-us-west-2.amazonaws.com/bucket/directory/
+
+
+
+export AWS_ACCESS_KEY_ID=""
+
+export AWS_SECRET_ACCESS_KEY=""

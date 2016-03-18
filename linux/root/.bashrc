@@ -1,0 +1,1 @@
+export PS1="\[$(tput bold)\][\[$(tput setaf 6)\]\u\[$(tput setaf 1)\]@\h \W]\\$ \[$(tput sgr0)\]"

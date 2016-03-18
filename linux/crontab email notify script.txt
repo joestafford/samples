@@ -1,0 +1,47 @@
+#!/bin/bash
+
+
+
+SUBJECT="You have email on server"
+
+EMAILMESSAGE="You have email on server that was delivered within the last hour."
+
+
+
+FILES=/var/spool/mail/*
+
+EXEMPT=/var/spool/mail/root
+
+
+
+cd0=$(date +%s)
+
+cd1=$(($cd0-3600))
+
+
+
+for f in $FILES
+
+do
+
+	md1=$(tac $f | grep -m1 --binary-files=text "Date:" | sed 's/Date\:\ //g')
+
+	md2=$(date --date="$md1" +%s)
+
+	if [ "$f" != "$EXEMPT" ]
+
+		then
+
+			if [ "$md2" -gt "$cd1" ]
+
+				then 
+
+					EMAIL=$(echo $f | cut -f5 -d'/')"@anon.com"
+
+					echo $EMAILMESSAGE | mail -s "$SUBJECT" "$EMAIL"
+
+			fi
+
+	fi
+
+done

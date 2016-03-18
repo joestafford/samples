@@ -1,0 +1,14 @@
+# Set Timezone
+
+sudo dpkg-reconfigure tzdata
+
+# Interactive screen, choose US then Eastern
+
+sudo service cron reload
+
+
+# Set NTP
+
+sudo apt-get install -y ntp
+sudo service ntp reload
+sudo ntpdate -s ntp.ubuntu.com

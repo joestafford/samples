@@ -1,0 +1,9 @@
+#!/bin/bash
+hostIP=$(hostname -i)
+hostName=$(hostname)
+sed -i "2i$hostIP $hostName" /etc/hosts
+sed -i '3i10.0.0.107 salt' /etc/hosts
+
+add-apt-repository ppa:saltstack/salt
+apt-get update
+apt-get install -y salt-minion

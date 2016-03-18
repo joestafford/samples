@@ -1,0 +1,21 @@
+#!/bin/bash 
+
+
+
+export AWS_ACCESS_KEY_ID="***"
+
+export AWS_SECRET_ACCESS_KEY="***"
+
+
+
+duplicity --encrypt-key 922081B1 --include /var/atlassian/application-data/crucible/backup/ --include /var/svnbackup/ --exclude "**" / s3://s3-us-west-2.amazonaws.com/bucket/directory/
+
+
+
+export AWS_ACCESS_KEY_ID=""
+
+export AWS_SECRET_ACCESS_KEY=""
+
+
+
+#END
